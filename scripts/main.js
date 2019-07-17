@@ -55,7 +55,46 @@ for (const student of students) {
     studentComponent = createStudentComponent1(student, "passing")
 
   } else {
-    studentComponent = createStudentComponent1(student,"failing")
+    studentComponent = createStudentComponent1(student, "failing")
   }
-  studentContainer1.innerHTML += studentComponent
+  // studentContainer1.innerHTML += studentComponent
 }
+
+// ------ Challenge: Composition of Smaller Components ------
+// Write functions that build the sub-components of the larger student component.
+
+const createH1 = (studentObject, cls) => {
+  return `<h1 class="xx-large ${cls}">${studentObject}</h1>`
+}
+
+const createSection = (studentObject) => {
+  return `<section class="bordered dashed section--padded">${studentObject}</section>`
+}
+
+const createAside = (studentObject) => {
+  return `<aside class="pushRight">${studentObject}</aside>`
+}
+
+const createStudentComponent2 = (studentObject, cls) => {
+  return `
+    <div class="student">
+      ${createH1(studentObject.name, cls)}
+      ${createSection(studentObject.subject)}
+      ${createAside(studentObject.info)}
+    </div>
+  `
+}
+
+const studentContainer2 = document.querySelector("#container")
+
+for (const student of students) {
+  let studentComponent = ""
+  if (student.score >= 60) {
+    studentComponent = createStudentComponent2(student, "passing")
+
+  } else {
+    studentComponent = createStudentComponent2(student, "failing")
+  }
+  studentContainer2.innerHTML += studentComponent
+}
+
