@@ -104,16 +104,23 @@ const createGenericElement = (tagName, studentObject, cls) => {
   return `<${tagName} class="${cls}">${studentObject}</${tagName}>`
 }
 
-const createStudentComponent3 = (studentObject) => `
+const createStudentComponent3 = (studentObject, passOrFail) => `
     <div id="student">
-        ${createGenericElement("h1", studentObject.name, "xx-large passing")}
+        ${createGenericElement("h1", studentObject.name, `xx-large ${passOrFail}`)}
         ${createGenericElement("section", studentObject.subject, "bordered dashed section--padded")}
         ${createGenericElement("aside", studentObject.info, "pushRight")}
     </div>
 `
 
-const createStudentUsingElementFunction = createStudentComponent3(students[1])
-// studentContainer.innerHTML = createStudentUsingElementFunction
+const studentContainer3 = document.querySelector("#container")
 
-
-
+for (const student of students) {
+  let studentComponent = ""
+  if (student.score >= 60) {
+    studentComponent = createStudentComponent3(student, "passing")
+    
+  } else {
+    studentComponent = createStudentComponent3(student, "failing")
+  }
+  studentContainer3.innerHTML += studentComponent
+}
