@@ -77,11 +77,11 @@ const createAside = (studentObject) => {
 
 const createStudentComponent2 = (studentObject, cls) => {
   return `
-    <div class="student">
-      ${createH1(studentObject.name, cls)}
-      ${createSection(studentObject.subject)}
-      ${createAside(studentObject.info)}
-    </div>
+  <div class="student">
+  ${createH1(studentObject.name, cls)}
+  ${createSection(studentObject.subject)}
+  ${createAside(studentObject.info)}
+  </div>
   `
 }
 
@@ -91,10 +91,29 @@ for (const student of students) {
   let studentComponent = ""
   if (student.score >= 60) {
     studentComponent = createStudentComponent2(student, "passing")
-
+    
   } else {
     studentComponent = createStudentComponent2(student, "failing")
   }
-  studentContainer2.innerHTML += studentComponent
+  // studentContainer2.innerHTML += studentComponent
 }
+
+// ------ Challenge: Generic HTML Function ------
+
+const createGenericElement = (tagName, studentObject, cls) => {
+  return `<${tagName} class="${cls}">${studentObject}</${tagName}>`
+}
+
+const createStudentComponent3 = (studentObject) => `
+    <div id="student">
+        ${createGenericElement("h1", studentObject.name, "xx-large passing")}
+        ${createGenericElement("section", studentObject.subject, "bordered dashed section--padded")}
+        ${createGenericElement("aside", studentObject.info, "pushRight")}
+    </div>
+`
+
+const createStudentUsingElementFunction = createStudentComponent3(students[1])
+// studentContainer.innerHTML = createStudentUsingElementFunction
+
+
 
